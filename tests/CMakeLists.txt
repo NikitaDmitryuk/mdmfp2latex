@@ -5,6 +5,8 @@ file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false "*.hpp" "*.cpp")
 
 add_executable(${TEST_BINARY} ${TEST_SOURCES})
 
-target_link_libraries(${TEST_BINARY} PRIVATE gtest ${CMAKE_PROJECT_NAME}lib)
+target_link_libraries(${TEST_BINARY} PRIVATE gtest ${CMAKE_PROJECT_NAME}_lib)
+
+target_include_directories(${TEST_BINARY} PRIVATE include)
 
 add_test(NAME ${TEST_BINARY} COMMAND ${TEST_BINARY})

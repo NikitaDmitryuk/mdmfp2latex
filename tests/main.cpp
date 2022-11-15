@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "mdmfp2latex/mdmfp2latex.hpp"
+#include "unittest_parser.hpp"
 
 TEST(testTest, test1){
   ASSERT_EQ(add(1, 1), 2);

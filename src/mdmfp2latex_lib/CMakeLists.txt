@@ -1,4 +1,4 @@
-# set(LIBRARY ${CMAKE_PROJECT_NAME}_lib)
+set(LIBRARY ${CMAKE_PROJECT_NAME}_lib)
 
 file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true "*.hpp" "*.cpp")
 
