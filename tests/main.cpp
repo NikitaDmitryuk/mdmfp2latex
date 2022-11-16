@@ -1,16 +1,10 @@
 #include "gtest/gtest.h"
-#include "unittest_parser.hpp"
+#include "mdmfp2latex/mdfile.hpp"
 
-TEST(testTest, test1){
-  ASSERT_EQ(add(1, 1), 2);
-}
+TEST(MdFile, test1){
+  MdFile mdFile = MdFile("a.md");
 
-TEST(testTest, test2){
-  ASSERT_EQ(add(1, -1), 0);
-}
-
-TEST(testTest, test3){
-  ASSERT_EQ(add(1, -3), -2);
+  ASSERT_EQ(mdFile.getFileName(), "a.md");
 }
 
 int main(int argc, char **argv) {
