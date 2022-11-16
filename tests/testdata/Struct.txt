@@ -1,7 +1,7 @@
 a.md            :style1 style2
 b.md            :style1 style2 style3
     c.md        :style
-        d.md    :style1 style2 
+        d.md    :style1 style2
     e.md        :style
     f.md        :style
 g.md            :style

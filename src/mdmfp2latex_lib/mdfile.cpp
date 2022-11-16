@@ -17,8 +17,12 @@ std::string MdFile::convert(std::string flags){
     return _textLatex;
 }
 
-void MdFile::readFile(){
-    std::ifstream t(_fileName);
+void MdFile::readFile(std::string srcPath){
+    namespace fs = std::filesystem;
+    fs::path dir (srcPath);
+    fs::path file (_fileName);
+    fs::path full_path = dir / file;
+    std::ifstream t(full_path.c_str());
     std::stringstream buffer;
     buffer << t.rdbuf();
     _fileText = buffer.str();

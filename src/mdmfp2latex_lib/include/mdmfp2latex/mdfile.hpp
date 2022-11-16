@@ -6,13 +6,16 @@
 #include <sstream>
 #include <vector>
 #include "boost/process.hpp"
+#include <filesystem>
+
+#include <iostream>
 
 class MdFile{
     public:
         MdFile(std::string fileName);
         ~MdFile();
         std::string convert(std::string flags);
-        void readFile();
+        void readFile(std::string srcPath);
         void setProperties(std::vector<std::string> properties);
         void setFileNestingLevel(int n);
         std::string getFileName();

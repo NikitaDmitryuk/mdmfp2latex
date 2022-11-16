@@ -5,8 +5,13 @@ Document::Document(std::string documentName){
 }
 
 void Document::setDocumentStruct(std::string structFile){
-    std::ifstream infile(structFile);
+    namespace fs = std::filesystem;
+    fs::path dir (_srcPath);
+    fs::path file (structFile);
+    fs::path full_path = dir / file;
+    std::ifstream infile(full_path.c_str());
     std::string line;
+
     while (std::getline(infile, line))
     {
         std::vector<std::string> strs;
@@ -42,7 +47,11 @@ std::vector<MdFile> Document::getMarkdownFiles(){
 }
 
 void Document::readMdFiles(){
-    for(MdFile file : _markdownFiles){
-        file.readFile();
+    for(int i = 0; i < _markdownFiles.size(); i++){
+        _markdownFiles[i].readFile(_srcPath);
     }
+}
+
+void Document::setSrcPath(std::string srcPath){
+    _srcPath = srcPath;
 }
