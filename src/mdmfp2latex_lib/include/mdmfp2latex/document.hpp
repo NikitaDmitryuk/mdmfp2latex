@@ -16,8 +16,9 @@ class Document{
         std::string getDocumentText();
         std::vector<MdFile> getMarkdownFiles();
         void setSrcPath(std::string);
-        void createLatexDocument();
+        void convertMdFiles();
         std::vector<std::string> getLatexText();
+        void createDocument();
     
     private:
         std::string _documentName;

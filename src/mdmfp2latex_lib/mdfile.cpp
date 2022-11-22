@@ -15,6 +15,7 @@ std::string MdFile::convert(std::string flags){
     std::string _textLatex = buffer.str();
     c.terminate();
     _textLatex = headerReplacement(_textLatex);
+    _textLatex = linkReplacement(_textLatex);
     return _textLatex;
 }
 
@@ -39,6 +40,11 @@ std::string MdFile::downFileHeaders(std::string text){
     std::regex section("\\\\section");
     text = std::regex_replace(text, section, "\\subsection");
 
+    return text;
+}
+
+std::string MdFile::linkReplacement(std::string text){
+    
     return text;
 }
 

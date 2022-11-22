@@ -58,7 +58,7 @@ void Document::setSrcPath(std::string srcPath){
     _srcPath = srcPath;
 }
 
-void Document::createLatexDocument(){
+void Document::convertMdFiles(){
     for(int i = 0; i < _markdownFiles.size(); i++){
         _latexText.push_back(_markdownFiles[i].convert());
     }
@@ -66,4 +66,10 @@ void Document::createLatexDocument(){
 
 std::vector<std::string> Document::getLatexText(){
     return _latexText;
+}
+
+void Document::createDocument(){
+    for(auto text : _latexText){
+        _documentText += text;
+    }
 }
