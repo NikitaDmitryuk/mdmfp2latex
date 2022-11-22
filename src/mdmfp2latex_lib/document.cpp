@@ -29,6 +29,8 @@ void Document::setDocumentStruct(std::string structFile){
         MdFile mdFile = MdFile(mdFileName);
         mdFile.setProperties(properties);
         mdFile.setFileNestingLevel(indent);
+        mdFile.setPathToFile(_srcPath);
+        mdFile.setFullFileName(_srcPath, mdFileName);
 
         _markdownFiles.push_back(mdFile);
     }
@@ -48,10 +50,20 @@ std::vector<MdFile> Document::getMarkdownFiles(){
 
 void Document::readMdFiles(){
     for(int i = 0; i < _markdownFiles.size(); i++){
-        _markdownFiles[i].readFile(_srcPath);
+        _markdownFiles[i].readFile();
     }
 }
 
 void Document::setSrcPath(std::string srcPath){
     _srcPath = srcPath;
+}
+
+void Document::createLatexDocument(){
+    for(int i = 0; i < _markdownFiles.size(); i++){
+        _latexText.push_back(_markdownFiles[i].convert());
+    }
+}
+
+std::vector<std::string> Document::getLatexText(){
+    return _latexText;
 }

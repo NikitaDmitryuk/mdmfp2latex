@@ -16,12 +16,16 @@ class Document{
         std::string getDocumentText();
         std::vector<MdFile> getMarkdownFiles();
         void setSrcPath(std::string);
+        void createLatexDocument();
+        std::vector<std::string> getLatexText();
     
     private:
         std::string _documentName;
         std::string _documentText;
+        std::vector<std::string> _latexText;
         std::vector<MdFile> _markdownFiles;
         std::string _srcPath;
+        std::string _outputPath;
 };
 
 #endif // DOCUMENT_HPP

@@ -8,8 +8,12 @@ int main(int argc, char **argv){
     document.setSrcPath("/home/nikita/Документы/mdmfp2latex/tests/testdata");
     document.setDocumentStruct("Struct.txt");
     document.readMdFiles();
+    document.createLatexDocument();
     for(MdFile mdfile : document.getMarkdownFiles()){
         std::cout << mdfile.getFileText() << std::endl;
+    }
+    for(auto text : document.getLatexText()){
+        std::cout << text << std::endl;
     }
     return 0;
 }
