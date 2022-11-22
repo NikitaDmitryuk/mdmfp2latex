@@ -7,8 +7,8 @@
 #include <vector>
 #include "boost/process.hpp"
 #include <filesystem>
-
-#include <iostream>
+#include <regex>
+#include <iterator>
 
 class MdFile{
     public:
@@ -28,6 +28,7 @@ class MdFile{
         std::string headerReplacement(std::string text);
 
     private:
+        std::string downFileHeaders(std::string text);
         std::string _fileName;
         int _fileNestingLevel;
         std::string _fileText;

@@ -14,11 +14,32 @@ std::string MdFile::convert(std::string flags){
     buffer << out.rdbuf();
     std::string _textLatex = buffer.str();
     c.terminate();
+    _textLatex = headerReplacement(_textLatex);
     return _textLatex;
 }
 
 std::string MdFile::headerReplacement(std::string text){
-    
+
+    for(int i=0; i < _fileNestingLevel; i++){
+        text = downFileHeaders(text);
+    }
+    return text;
+}
+
+std::string MdFile::downFileHeaders(std::string text){
+    std::regex paragraph("\\\\paragraph");
+    text = std::regex_replace(text, paragraph, "\\subparagraph");
+
+    std::regex subsubsection("\\\\subsubsection");
+    text = std::regex_replace(text, subsubsection, "\\paragraph");
+
+    std::regex subsection("\\\\subsection");
+    text = std::regex_replace(text, subsection, "\\subsubsection");
+
+    std::regex section("\\\\section");
+    text = std::regex_replace(text, section, "\\subsection");
+
+    return text;
 }
 
 void MdFile::readFile(){
