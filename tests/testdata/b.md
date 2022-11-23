@@ -6,4 +6,4 @@
 
 Какой-то текст subsection
 
-[Link to Header](#file-b)
+[Link to Header](#b.md:file-b)

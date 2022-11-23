@@ -30,6 +30,8 @@ class MdFile{
         std::string downFileHeaders(std::string text);
         std::string linkReplacement(std::string text);
         std::string headerReplacement(std::string text);
+        std::string hyperlinkReplacement(std::string text);
+        std::string firstLinkReplacement(std::string text);
         std::string _fileName;
         int _fileNestingLevel;
         std::string _fileText;

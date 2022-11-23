@@ -10,6 +10,8 @@
 
 Какой-то текст subsection 2
 
-[Link to Header](#file-c-subsection)
+[Link to Header](#c.md:file-c-subsection)
 
 [Link to B subsection](#b.md:file-b-subsection)
+
+[Link to B subsection](#b.md)

@@ -16,7 +16,18 @@ std::string MdFile::convert(std::string flags){
     c.terminate();
     _textLatex = headerReplacement(_textLatex);
     _textLatex = linkReplacement(_textLatex);
+    _textLatex = hyperlinkReplacement(_textLatex);
+    _textLatex = firstLinkReplacement(_textLatex);
     return _textLatex;
+}
+
+std::string MdFile::firstLinkReplacement(std::string text){
+    std::regex hyperLink("\\\\hypertarget\\{(.*?)\\}");
+    text = std::regex_replace(text, hyperLink, "\\hypertarget{" + _fileName + "}", std::regex_constants::format_first_only);
+
+    std::regex label("\\\\label\\{(.*?)\\}");
+    text = std::regex_replace(text, label, "\\label{" + _fileName + "}", std::regex_constants::format_first_only);
+    return text;
 }
 
 std::string MdFile::headerReplacement(std::string text){
@@ -24,6 +35,12 @@ std::string MdFile::headerReplacement(std::string text){
     for(int i=0; i < _fileNestingLevel; i++){
         text = downFileHeaders(text);
     }
+    return text;
+}
+
+std::string MdFile::hyperlinkReplacement(std::string text){
+    std::regex hyperLink("\\\\hypertarget\\{(.*)\\}");
+    text = std::regex_replace(text, hyperLink, "\\hypertarget{" + _fileName + ":$1}");
     return text;
 }
 
@@ -44,7 +61,8 @@ std::string MdFile::downFileHeaders(std::string text){
 }
 
 std::string MdFile::linkReplacement(std::string text){
-    
+    std::regex label("\\\\label\\{(.*)\\}");
+    text = std::regex_replace(text, label, "\\label{" + _fileName + ":$1}");
     return text;
 }
 

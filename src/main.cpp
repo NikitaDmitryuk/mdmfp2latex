@@ -6,7 +6,7 @@
 int main(int argc, char **argv){
 
     Document document = Document("test.tex");
-    document.setSrcPath("/home/nikita/Документы/mdmfp2latex/tests/testdata");
+    document.setSrcPath("/home/nikita/Документы/mdmfp2latex/test");
     document.setDocumentStruct("Struct.txt");
     document.readMdFiles();
     document.convertMdFiles();
