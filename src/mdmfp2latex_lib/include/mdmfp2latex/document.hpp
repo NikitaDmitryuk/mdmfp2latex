@@ -6,6 +6,9 @@
 #include <boost/algorithm/string.hpp>
 #include <mdmfp2latex/mdfile.hpp>
 #include <filesystem>
+#include <iostream>
+#include "boost/process.hpp"
+#include <sstream>
 
 class Document{
     public:
@@ -19,6 +22,7 @@ class Document{
         void convertMdFiles();
         std::vector<std::string> getLatexText();
         void createDocument();
+        void createPreamble();
     
     private:
         std::string _documentName;
@@ -27,6 +31,7 @@ class Document{
         std::vector<MdFile> _markdownFiles;
         std::string _srcPath;
         std::string _outputPath;
+        std::string _preamble;
 };
 
 #endif // DOCUMENT_HPP

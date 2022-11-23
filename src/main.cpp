@@ -22,5 +22,7 @@ int main(int argc, char **argv){
     std::ofstream out(outputFileName);
     out << document.getDocumentText();
     out.close();
+
+    document.createPreamble();
     return 0;
 }

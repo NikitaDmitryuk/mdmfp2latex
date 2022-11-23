@@ -60,7 +60,7 @@ void Document::setSrcPath(std::string srcPath){
 
 void Document::convertMdFiles(){
     for(int i = 0; i < _markdownFiles.size(); i++){
-        _latexText.push_back(_markdownFiles[i].convert());
+         _latexText.push_back(_markdownFiles[i].convert());
     }
 }
 
@@ -72,4 +72,30 @@ void Document::createDocument(){
     for(auto text : _latexText){
         _documentText += text;
     }
+}
+
+void Document::createPreamble(){
+    std::string fullDocumentTextMd;
+    for(MdFile file : _markdownFiles){
+        fullDocumentTextMd += file.getFileText();
+    }
+    std::ofstream outMdFile("preamble.md");
+    outMdFile << fullDocumentTextMd;
+    outMdFile.close();
+
+    namespace bp = boost::process;
+    bp::ipstream out;
+    std::stringstream buffer;
+    bp::child c("pandoc -s -f markdown -t latex preamble.md", bp::std_out > out);
+    buffer << out.rdbuf();
+    std::string textLatex = buffer.str();
+    c.terminate();
+    //std::cout << textLatex << std::endl;
+
+    std::regex documentText("\\\\begin\\{document\\}([\\s\\S]*)\\\\end\\{document\\}");
+    textLatex = std::regex_replace(textLatex, documentText, "\% тело документа");
+
+    std::ofstream preambleFile("preamble.tex");
+    preambleFile << textLatex;
+    preambleFile.close();
 }
