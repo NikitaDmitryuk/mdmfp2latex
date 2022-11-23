@@ -60,7 +60,7 @@ void Document::setSrcPath(std::string srcPath){
 
 void Document::convertMdFiles(){
     for(int i = 0; i < _markdownFiles.size(); i++){
-         _latexText.push_back(_markdownFiles[i].convert());
+        _latexText.push_back(_markdownFiles[i].convert());
     }
 }
 
