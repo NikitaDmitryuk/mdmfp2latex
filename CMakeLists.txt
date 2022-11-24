@@ -9,3 +9,5 @@ enable_testing()
 
 add_subdirectory(src)
 add_subdirectory(tests)
+
+install(TARGETS mdmfp2latex DESTINATION bin)

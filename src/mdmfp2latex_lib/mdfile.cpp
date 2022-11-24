@@ -18,6 +18,7 @@ std::string MdFile::convert(std::string flags){
     _textLatex = linkReplacement(_textLatex);
     _textLatex = hyperlinkReplacement(_textLatex);
     _textLatex = firstLinkReplacement(_textLatex);
+    _textLatex = removeExtraSymbols(_textLatex);
     return _textLatex;
 }
 
@@ -27,6 +28,13 @@ std::string MdFile::firstLinkReplacement(std::string text){
 
     std::regex label("\\\\label\\{(.*?)\\}");
     text = std::regex_replace(text, label, "\\label{" + _fileName + "}", std::regex_constants::format_first_only);
+    return text;
+}
+
+std::string MdFile::removeExtraSymbols(std::string text){
+    // \textquotesingle{}
+    std::regex hyperLink("\\\\textquotesingle\\{\\}");
+    text = std::regex_replace(text, hyperLink, "\'");
     return text;
 }
 

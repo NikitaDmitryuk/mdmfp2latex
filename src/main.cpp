@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
     desc.add_options ()
         ("help,h", "print usage message")
         ("input,i", po::value(&input), "Input struct file")
-        ("preamble,m", po::value(&output), "Create preamble file")
+        ("preamble,m", "Create preamble file")
         ("path,p", po::value(&output), "Path to files")
         ("output,o", po::value(&output), "Output latex file");
     // Parse command line arguments
@@ -35,7 +35,11 @@ int main(int argc, char** argv) {
     document.readMdFiles();
     document.convertMdFiles();
     document.createDocument();
-    std::ofstream out(document.getDocumentName());
+    namespace fs = std::filesystem;
+    fs::path dir (vm["path"].as<std::string>());
+    fs::path file (document.getDocumentName());
+    fs::path full_path = dir / file;
+    std::ofstream out(full_path.c_str());
     out << document.getDocumentText();
     out.close();
 

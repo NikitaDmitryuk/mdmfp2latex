@@ -82,6 +82,7 @@ void Document::createPreamble(){
     std::ofstream outMdFile("preamble.md");
     outMdFile << fullDocumentTextMd;
     outMdFile.close();
+    std::cout << "1" << std::endl;
 
     namespace bp = boost::process;
     bp::ipstream out;
@@ -90,12 +91,18 @@ void Document::createPreamble(){
     buffer << out.rdbuf();
     std::string textLatex = buffer.str();
     c.terminate();
-    //std::cout << textLatex << std::endl;
+    std::cout << "2" << std::endl;
 
     std::regex documentText("\\\\begin\\{document\\}([\\s\\S]*)\\\\end\\{document\\}");
-    textLatex = std::regex_replace(textLatex, documentText, "\% тело документа");
+    textLatex = std::regex_replace(textLatex, documentText, "%");
+    std::cout << "3" << std::endl;
 
-    std::ofstream preambleFile("preamble.tex");
+    namespace fs = std::filesystem;
+    fs::path dir (".");
+    fs::path file ("preamble.tex");
+    fs::path full_path = dir / file;
+    std::ofstream preambleFile(full_path.c_str());
+    std::cout << full_path.c_str() << std::endl;
     preambleFile << textLatex;
     preambleFile.close();
 }
